@@ -30,6 +30,8 @@ COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 # Install thelounge.
 RUN apk --update --no-cache --virtual build-deps add python3 build-base git && \
     ln -sf python3 /usr/bin/python && \
+    yarn --non-interactive install --prod=false && \
+    yarn build && \
     yarn --non-interactive --frozen-lockfile global add file:/usr/src/app && \
     yarn --non-interactive cache clean && \
     apk del --purge build-deps && \
